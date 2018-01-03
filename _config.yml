@@ -1,10 +1,10 @@
 # Site settings
-title: Your Blog
-SEOTitle: 你的博客 | Your Blog
+title: Lampard's Blog 
+SEOTitle: Lampard's Blog | Lampard Hong Blog
 header-img: img/home-bg.jpg
-email: lampard@gmail.com
+email: 303619494@qq.com
 description: ""
-keyword: ""
+keyword: "Lampard Hong"
 url: "http://lampard1014.github.io"              # your host, for absolute URL
 baseurl: "/"         # for example, '/blog' if your blog hosted on 'host/blog'
 #baseurl: "/huxblog-boilerplate"         # for example, '/blog' if your blog hosted on 'host/blog'
@@ -60,10 +60,10 @@ duoshuo_share: true                     # set to false if you want to use Commen
 
 # Analytics settings
 # Baidu Analytics
-ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
+ba_track_id:18ad12511d66ff7700723ef59cbd685e 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_track_id: 'UA-111859456-1'            # Format: UA-xxxxxx-xx
+ga_domain:lampard1014.github.io 
 
 
 
