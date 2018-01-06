@@ -1,6 +1,6 @@
 # Site settings
-title: Lampard's Blog 
-SEOTitle: Lampard's Blog | Lampard Hong Blog
+title: 印象派编程 
+SEOTitle: Lampard's Impressionnisme Coding | Lampard Hong Impressionnisme Coding Blog
 header-img: img/home-bg.jpg
 email: 303619494@qq.com
 description: ""
@@ -13,11 +13,10 @@ baseurl: "/"         # for example, '/blog' if your blog hosted on 'host/blog'
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-#twitter_username:  huxpro
-facebook_username:  huxpro
+weibo_username:    momokoyo 
+zhihu_username:     momokoyo 
+github_username:   lampard1014 
+facebook_username:  lampard1014  
 
 
 
