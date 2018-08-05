@@ -1,0 +1,532 @@
+---
+layout:     post
+title:      "数据结构&算法"
+subtitle:   "数据结构篇01-数据 队列 链表"
+date:       2018-08-04
+author:     "Lampard"
+header-img: "img/datastruct-icon.jpeg"
+tags:
+    - 数据结构 
+    - 算法
+   
+---
+
+
+
+
+
+# 数组
+
+在计算机科学中，**数组数据结构**（英语：array data structure），简称**数组**（英语：Array），是由相同类型的元素（element）的集合所组成的[数据结构](https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)，分配一块连续的内存来存储。利用元素的索引（index）可以计算出该元素对应的存储地址。
+
+最简单的数据结构类型是**一维数组**。例如，索引为0到9的32位整数数组，可作为在存储器地址2000，2004，2008，...2036中，存储10个变量，因此索引为i的元素即在存储器中的2000+4×i地址。数组第一个元素的存储器地址称为第一地址或基础地址。
+
+**二维数组**，对应于数学上的[矩阵](https://zh.wikipedia.org/wiki/%E7%9F%A9%E9%99%A3)概念，可表示为二维矩形格。例如：![a={\begin{bmatrix}3&6&2\\0&1&-4\\2&-1&0\end{bmatrix}}](https://wikimedia.org/api/rest_v1/media/math/render/svg/f3fe7cbb32984a8abfa8a8c364ad767599f8a6c9) 而计算机编程中的数组看起来像这样，例如[C语言](https://zh.wikipedia.org/wiki/C%E8%AF%AD%E8%A8%80)中的数组：
+
+```
+1 int a[3][3] = {
+2     {3,  6,  2},
+3     {0,  1, -4},
+4     {2, -1,  0}
+5 };
+
+```
+
+在某些情况下，“[向量](https://zh.wikipedia.org/wiki/%E5%90%91%E9%87%8F)”一词也可能代表二维数组，虽然在数学意义上更确切地称呼为[元组](https://zh.wikipedia.org/wiki/%E5%85%83%E7%BB%84)（tuple），而不是向量。但需要注意的是：计算机科学的某些领域，如Matlab，元组是指类似C语言struct类型，具有固定的往往是不同类型的数据成员的数据结构。
+
+数组通常用于实现[数据库](https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93)的表格，特别是查询表；表格有时也被当作是数组的同义词。
+
+数组是最早期和最重要的数据结构之一，很多程序都会用到数组。它们也用于实现许多其他数据结构，譬如列表（list）和[字符串](https://zh.wikipedia.org/wiki/%E5%AD%97%E4%B8%B2)（string）。它们有成效地开展了计算机的定址逻辑。在大多数现代计算机和许多外部存储设备中，存储器如同一维数组，索引就是其地址。编译器、处理单元（特别是[向量处理器](https://zh.wikipedia.org/wiki/%E5%90%91%E9%87%8F%E5%A4%84%E7%90%86%E5%99%A8)），经常会针对数组操作进行优化。
+
+因为在程序运行时可以计算元素的索引，数组是很有用的。此外，也能以单一迭代语句就处理数组的许多元素。为此，数组数据结构的元素必须具有相同的大小，而且应该使用相同的[数据类型](https://zh.wikipedia.org/wiki/%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5)表示。
+
+数组一词通常用于表示数组数据类型，一种大多数高阶编程语言都会内置的[数据类型](https://zh.wikipedia.org/wiki/%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5)。数组类型通常由数组结构来实现；然而在某些语言中，它们可以由[散列表](https://zh.wikipedia.org/wiki/%E5%93%88%E5%B8%8C%E8%A1%A8)、[链表](https://zh.wikipedia.org/wiki/%E9%80%A3%E7%B5%90%E4%B8%B2%E5%88%97)、[搜索树](https://zh.wikipedia.org/w/index.php?title=%E6%90%9C%E7%B4%A2%E6%A8%B9&action=edit&redlink=1)或其它[数据结构](https://zh.wikipedia.org/wiki/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B)来实现。
+
+在算法的描述中，数组一词特别着重意义为[关系数组](https://zh.wikipedia.org/wiki/%E5%85%B3%E8%81%94%E6%95%B0%E7%BB%84)或“抽象的数组”，一种理论上的计算机科学模型（抽象数据类型或 ADT），专注于数组的基本性质上。
+
+### 一维数组
+
+一维（或单维）数组是一种线性数组，其中元素的访问是以行或列索引的单一下标表示。
+
+譬如考虑C编程语言的数组宣告
+`int anArrayName [10];`
+
+语法为：
+
+`datatype anArrayname [sizeofArray];`
+
+### 多维数组	
+
+普通数组采用一个整数来作下标。**多维数组**（**高维数组**）的概念特别是在数值计算和图形应用方面非常有用。我们在多维数组之中采用一系列有序的整数来标注，如在[ 3,1,5 ] 。这种整数列表之中整数的个数始终相同，且被称为数组的“维度”。关于每个数组维度的边界称为“维”。维度为*k*的数组通常被称为*k*维。
+
+多维数组的数组名字，在表达式中自动转换为数组首元素地址值，但这个首元素实际上是去除数组下标第一维之后的数组剩余部分。例如：
+
+```
+1 int a[10][15];
+2 int (*p)[15] = a; // a在表达式中自动转换为指向具有15个int的数组的指针值
+```
+
+
+
+
+
+# 堆栈
+
+**栈**（英语：stack）又称为**栈**或**堆叠**，是[计算机科学](https://zh.wikipedia.org/wiki/%E8%A8%88%E7%AE%97%E6%A9%9F%E7%A7%91%E5%AD%B8)中一种特殊的串列形式的[抽象数据类型](https://zh.wikipedia.org/wiki/%E6%8A%BD%E8%B1%A1%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5)，其特殊之处在于只能允许在[链表](https://zh.wikipedia.org/wiki/%E9%80%A3%E7%B5%90%E4%B8%B2%E5%88%97)或[数组](https://zh.wikipedia.org/wiki/%E9%99%A3%E5%88%97)的一端（称为堆栈顶端指针，英语：top）进行加入数据（英语：push）和输出数据（英语：pop）的运算。另外栈也可以用一维[数组](https://zh.wikipedia.org/wiki/%E9%99%A3%E5%88%97)或[链表](https://zh.wikipedia.org/wiki/%E9%80%A3%E7%B5%90%E4%B8%B2%E5%88%97)的形式来完成。堆栈的另外一个相对的操作方式称为[队列](https://zh.wikipedia.org/wiki/%E4%BD%87%E5%88%97)。
+
+由于堆栈数据结构只允许在一端进行操作，因而按照后进先出（LIFO, Last In First Out）的原理运作。
+
+## 操作
+
+堆栈数据结构使用两种基本操作：推入（压栈，push）和弹出（弹栈，pop）：
+
+- 推入：将数据放入堆栈的顶端（数组形式或串列形式），堆栈顶端top指针加一。
+- 弹出：将顶端数据数据输出（回传），堆栈顶端数据减一。
+
+## 特点
+
+栈的基本特点：
+
+1. 先入后出，后入先出。
+2. 除头尾节点之外，每个元素有一个前驱，一个后继。
+
+
+
+### 数组堆栈
+
+堆栈可以用[链表](https://zh.wikipedia.org/wiki/%E9%93%BE%E8%A1%A8)和[数组](https://zh.wikipedia.org/wiki/%E6%95%B0%E7%BB%84)两种方式实现，一般为一个堆栈预先分配一个大小固定且较合适的空间并非难事，所以较流行的做法是`Stack`结构下含一个数组。如果空间实在紧张，也可用链表实现，且去掉[表头](https://zh.wikipedia.org/wiki/%E8%A1%A8%E5%A4%B4)。这里的例程是以数组实现的。
+
+```
+ 1 #include <stdio.h>
+ 2 #include <stdlib.h>
+ 3 #include <stdbool.h>
+ 4 #define stack struct Stack
+ 5 #define STACK_POP_ERR 42
+ 6 
+ 7 // 堆疊資料結構 堆栈数据结构
+ 8 struct Stack {
+ 9     int val[10]; // 陣列空間
+10     int top;     // 堆疊頂端指標（栈顶）
+11 };
+12 // 檢查堆疊是否為空
+13 bool empty(stack *stk) {
+14     return stk->top == 0;
+15 }
+16 // 推入資料
+17 void push(stack *stk, int x) {
+18     stk->top = stk->top + 1;
+19     stk->val[stk->top] = x;
+20 }
+21 // 彈出并返回資料
+22 int pop(stack *stk) {
+23     if (empty(stk))
+24         return STACK_POP_ERR; // 不能彈出
+25     else {
+26         stk->top = stk->top - 1;
+27         return stk->val[stk->top + 1];
+28     }
+29 }
+30 int main() {
+31     // 宣告并初始化資料結構空間
+32     stack stk;
+33     stk.top = 0;
+34     // 推入四个
+35     push(&stk, 3);
+36     push(&stk, 4);
+37     push(&stk, 1);
+38     push(&stk, 9);
+39     // 弹出三个
+40     printf("%d ", pop(&stk));
+41     printf("%d ", pop(&stk));
+42     printf("%d ", pop(&stk));
+43     return 0;
+44 }
+```
+
+### 串列堆栈
+
+```
+ 1 // 链栈的结构定义
+ 2 typedef struct {
+ 3     SLink top; // 棧頂指針
+ 4     int length; // 棧中元素個數
+ 5 } Stack;
+ 6 
+ 7 // 构造空栈 S
+ 8 void InitStack (Stack &S) {
+ 9     S.top = NULL; // 設棧頂指針的初值為"空"
+10     S.length = 0; // 空棧中元素個數為0
+11 }
+12 // 如果指针反过来从栈底到栈顶的话，删除栈顶元素时，为修改其前驱指针，需要从栈底一直找到栈顶。
+13 
+14 // 在棧頂S 之上插入元素e為新的棧頂元素，並返回成功與否
+15 bool Push (Stack &S, ElemType e) {
+16     p = new LNode; // 建新的結點
+17     if (!p) // 存儲分配失敗
+18         return false;
+19     p->data = e;
+20     p->next = S.top;// 鏈接到原來的棧頂
+21     S.top = p; // 移動棧頂指針
+22     ++S.length; // 棧的長度增1
+23 }
+24 // 在链栈的类型定义中设立“栈中元素个数”的成员是为了便于求得栈的长度。
+25 
+26 // 刪除S 棧頂且以e 返回其數值，返回成功與否
+27 bool Pop (Stack &S, SElemType &e) {
+28     if (!S.top)
+29         return false;
+30     else {
+31         e = S.top -> data; // 返回棧頂元素
+32         q = S.top;
+33         S.top = S.top -> next; // 修改棧頂指針
+34         --S.length; // 棧的長度減1
+35         delete q; // 釋放被刪除的結點空間
+36         return true;
+37     }
+38 }
+```
+
+
+
+# 队列
+
+**队列**，又称为**伫列**（queue），是[先进先出](https://zh.wikipedia.org/wiki/%E5%85%88%E9%80%B2%E5%85%88%E5%87%BA)（FIFO, First-In-First-Out）的[线性表](https://zh.wikipedia.org/wiki/%E7%BA%BF%E6%80%A7%E8%A1%A8)。在具体应用中通常用[链表](https://zh.wikipedia.org/wiki/%E9%93%BE%E8%A1%A8)或者[数组](https://zh.wikipedia.org/wiki/%E6%95%B0%E7%BB%84)来实现。队列只允许在后端（称为*rear*）进行插入操作，在前端（称为*front*）进行删除操作。当front=rear时，队列中没有任何元素，称为空队列。
+
+队列的操作方式和[堆栈](https://zh.wikipedia.org/wiki/%E5%A0%86%E6%A0%88)类似，唯一的区别在于队列只允许新数据在后端进行添加。
+
+### 顺序队列
+
+建立顺序队列结构必须为其静态分配或动态申请一片连续的存储空间，并设置两个指针进行管理。一个是队头指针front，它指向队头元素；另一个是队尾指针rear，它指向下一个入队元素的存储位置
+
+### 循环队列
+
+在实际使用队列时，为了使队列空间能重复使用，往往对队列的使用方法稍加改进：无论插入或删除，一旦rear指针增1或front指针增1 时超出了所分配的队列空间，就让它指向这片连续空间的起始位置。这实际上是把队列空间想象成一个环形空间，环形空间中的存储单元循环使用，用这种方法管理的队列也就称为循环队列。除了一些简单应用之外，真正实用的队列是循环队列。
+
+在循环队列中，当队列为空时，有front=rear，而当所有队列空间全占满时，也有front=rear。为了区别这两种情况，规定循环队列最多只能有MaxSize-1个队列元素，当循环队列中只剩下一个空存储单元时，队列就已经满了。因此，队列判空的条件时front=rear，而队列判满的条件时front=（rear+1）%MaxSize。
+
+### 伪溢出
+
+伪溢出是指队列的存储区没有满，但队列发生了溢出。
+
+顺序队列中的溢出现象：
+
+（1） "下溢"现象：当队列为空时，做出队运算产生的溢出现象。“下溢”是正常现象，常用作程序控制转移的条件。
+
+（2）"真上溢"现象：当队列满时，做进栈运算产生空间溢出的现象。“真上溢”是一种出错状态，应设法避免。
+
+（3）"假上溢"现象：由于入队和出队操作中，头尾指针只增加不减小，致使被删元素的空间永远无法重新利用。当队列中实际的元素个数远远小于向量空间的规模时，也可能由于尾指针已超越向量空间的上界而不能做入队操作。该现象称为"假上溢"现象。
+
+### 单链队列
+
+单链队列使用链表作为基本数据结果，所以不存在伪溢出的问题，队列长度也没有限制。但插入和读取的时间代价较高
+
+```
+  1 // 单链队列——队列的链式存储结构
+  2 typedef struct QNode {
+  3     QElemType data;
+  4     struct QNode *next;
+  5 } QNode, *QueuePtr;
+  6 
+  7 typedef struct {
+  8     QueuePtr front, rear; // 队头、队尾指针
+  9 } LinkQueue;
+ 10 
+ 11 // 链队列的基本操作(9个)
+ 12 void InitQueue(LinkQueue *Q) {
+ 13     // 构造一个空队列Q
+ 14     Q->front = Q->rear = malloc(sizeof(QNode));
+ 15     if (!Q->front)
+ 16         exit(OVERFLOW);
+ 17     Q->front->next = NULL;
+ 18 }
+ 19 
+ 20 void DestroyQueue(LinkQueue *Q) {
+ 21     // 销毁队列Q(无论空否均可)
+ 22     while (Q->front) {
+ 23         Q->rear = Q->front->next;
+ 24         free(Q->front);
+ 25         Q->front = Q->rear;
+ 26     }
+ 27 }
+ 28 
+ 29 void ClearQueue(LinkQueue *Q) {
+ 30     // 将Q清为空队列
+ 31     QueuePtr p, q;
+ 32     Q->rear = Q->front;
+ 33     p = Q->front->next;
+ 34     Q->front->next = NULL;
+ 35     while (p) {
+ 36         q = p;
+ 37         p = p->next;
+ 38         free(q);
+ 39     }
+ 40 }
+ 41 
+ 42 Status QueueEmpty(LinkQueue Q) {
+ 43     // 若Q为空队列，则返回TRUE，否则返回FALSE
+ 44     if (Q.front->next == NULL)
+ 45         return TRUE;
+ 46     else
+ 47         return FALSE;
+ 48 }
+ 49 
+ 50 int QueueLength(LinkQueue Q) {
+ 51     // 求队列的长度
+ 52     int i = 0;
+ 53     QueuePtr p;
+ 54     p = Q.front;
+ 55     while (Q.rear != p) {
+ 56         i++;
+ 57         p = p->next;
+ 58     }
+ 59     return i;
+ 60 }
+ 61 
+ 62 Status GetHead_Q(LinkQueue Q, QElemType *e) {
+ 63     // 若队列不空，则用e返回Q的队头元素，并返回OK，否则返回ERROR
+ 64     QueuePtr p;
+ 65     if (Q.front == Q.rear)
+ 66         return ERROR;
+ 67     p = Q.front->next;
+ 68     *e = p->data;
+ 69     return OK;
+ 70 }
+ 71 
+ 72 void EnQueue(LinkQueue *Q, QElemType e) {
+ 73     // 插入元素e为Q的新的队尾元素
+ 74     QueuePtr p = (QueuePtr)malloc(sizeof(QNode));
+ 75     if (!p) // 存储分配失败
+ 76         exit(OVERFLOW);
+ 77     p->data = e;
+ 78     p->next = NULL;
+ 79     Q->rear->next = p;
+ 80     Q->rear = p;
+ 81 }
+ 82 
+ 83 Status DeQueue(LinkQueue *Q, QElemType *e) {
+ 84     // 若队列不空，删除Q的队头元素，用e返回其值，并返回OK，否则返回ERROR
+ 85     QueuePtr p;
+ 86     if (Q->front == Q->rear)
+ 87         return ERROR;
+ 88     p = Q->front->next; // 指向头结点
+ 89     *e = p->data;
+ 90     Q->front = p->next; // 摘下头节点
+ 91     if (Q->rear == p)
+ 92         Q->rear = Q->front;
+ 93     free(p);
+ 94     return OK;
+ 95 }
+ 96 
+ 97 void QueueTraverse(LinkQueue Q, void(*vi)(QElemType)) {
+ 98     // 从队头到队尾依次对队列Q中每个元素调用函数vi()
+ 99     QueuePtr p;
+100     p = Q.front->next;
+101     while (p) {
+102         vi(p->data);
+103         p = p->next;
+104     }
+105     printf("\n");
+106 }
+```
+
+
+
+### 循环队列
+
+循环队列可以更简单防止伪溢出的发生，但队列大小是固定的。
+
+```
+ 1 // 队列的顺序存储结构(循环队列)，（顺序线性表的实现）
+ 2 #define MAX_QSIZE 5 // 最大队列长度+1
+ 3 typedef struct {
+ 4     QElemType *base; // 初始化的动态分配存储空间
+ 5     int front; // 头指针，若队列不空，指向队列头元素
+ 6     int rear; // 尾指针，若队列不空，指向队列尾元素的下一个位置
+ 7 } SqQueue;
+ 8 
+ 9 // 循环队列的基本操作(9个)
+10 void InitQueue(SqQueue *Q) {
+11     // 构造一个空队列Q
+12     Q->base = malloc(MAX_QSIZE * sizeof(QElemType));
+13     if (!Q->base) // 存储分配失败
+14         exit(OVERFLOW);
+15     Q->front = Q->rear = 0;
+16 }
+17 
+18 void DestroyQueue(SqQueue *Q) {
+19     // 销毁队列Q，Q不再存在
+20     if (Q->base)
+21         free(Q->base);
+22     Q->base = NULL;
+23     Q->front = Q->rear = 0;
+24 }
+25 
+26 void ClearQueue(SqQueue *Q) {
+27     // 将Q清为空队列
+28     Q->front = Q->rear = 0;
+29 }
+30 
+31 Status QueueEmpty(SqQueue Q) {
+32     // 若队列Q为空队列，则返回TRUE；否则返回FALSE
+33     if (Q.front == Q.rear) // 队列空的标志
+34         return TRUE;
+35     else
+36         return FALSE;
+37 }
+38 
+39 int QueueLength(SqQueue Q) {
+40     // 返回Q的元素个数，即队列的长度
+41     return (Q.rear - Q.front + MAX_QSIZE) % MAX_QSIZE;
+42 }
+43 
+44 Status GetHead(SqQueue Q, QElemType *e) {
+45     // 若队列不空，则用e返回Q的队头元素，并返回OK；否则返回ERROR
+46     if (Q.front == Q.rear) // 队列空
+47         return ERROR;
+48     *e = Q.base[Q.front];//下一个类型步长的地址单元的值
+49     return OK;
+50 }
+51 
+52 Status EnQueue(SqQueue *Q, QElemType e) {
+53     // 插入元素e为Q的新的队尾元素
+54     if ((Q->rear + 1) % MAX_QSIZE == Q->front) // 队列满
+55         return ERROR;
+56     Q->base[Q->rear] = e;
+57     Q->rear = (Q->rear + 1) % MAX_QSIZE;//循环队列的指针前进的方式是去余
+58     return OK;
+59 }
+60 
+61 Status DeQueue(SqQueue *Q, QElemType *e) {
+62     // 若队列不空，则删除Q的队头元素，用e返回其值，并返回OK；否则返回ERROR
+63     if (Q->front == Q->rear) // 队列空
+64         return ERROR;
+65     *e = Q->base[Q->front];
+66     Q->front = (Q->front + 1) % MAX_QSIZE;
+67     return OK;
+68 }
+69 
+70 void QueueTraverse(SqQueue Q, void(*vi)(QElemType)) {
+71     // 从队头到队尾依次对队列Q中每个元素调用函数vi()
+72     int i;
+73     i = Q.front;
+74     while (i != Q.rear) {
+75         vi(Q.base[i]);
+76         i = (i + 1) % MAX_QSIZE;
+77     }
+78     printf("\n");
+79 }
+```
+
+
+
+# 链表
+
+**链表**（Linked list）是一种常见的基础数据结构，是一种[线性表](https://zh.wikipedia.org/wiki/%E7%BA%BF%E6%80%A7%E8%A1%A8)，但是并不会按线性的顺序存储数据，而是在每一个节点里存到下一个节点的[指针](https://zh.wikipedia.org/wiki/%E6%8C%87%E6%A8%99_(%E9%9B%BB%E8%85%A6%E7%A7%91%E5%AD%B8))(Pointer)。由于不必须按顺序存储，链表在插入的时候可以达到O(1)的[复杂度](https://zh.wikipedia.org/wiki/%E8%A4%87%E9%9B%9C%E5%BA%A6)，比另一种线性表[顺序表](https://zh.wikipedia.org/wiki/%E9%A1%BA%E5%BA%8F%E8%A1%A8)快得多，但是查找一个节点或者访问特定编号的节点则需要O(n)的时间，而顺序表相应的时间复杂度分别是O(logn)和O(1)。
+
+使用链表结构可以克服数组链表需要预先知道数据大小的缺点，链表结构可以充分利用计算机内存空间，实现灵活的内存动态管理。但是链表失去了数组随机读取的优点，同时链表由于增加了结点的指针域，空间开销比较大。
+
+### 单向链表
+
+链表中最简单的一种是单向链表，它包含两个域，一个信息域和一个指针域。这个链接指向列表中的下一个节点，而最后一个节点则指向一个空值。
+
+[![Singly-linked-list.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Singly-linked-list.svg/408px-Singly-linked-list.svg.png)](https://zh.wikipedia.org/wiki/File:Singly-linked-list.svg)
+*一个单向链表包含两个值: 当前节点的值和一个指向下一个节点的链接*
+
+一个单向链表的节点被分成两个部分。第一个部分保存或者显示关于节点的信息，第二个部分存储下一个节点的地址。单向链表只可向一个方向遍历。（例如图的邻接表，通常都是按固定顺序访问的）。
+
+### 双向链表
+
+一种更复杂的链表是“双向链表”或“双面链表”。每个节点有两个连接：一个指向前一个节点，（当此“连接”为第一个“连接”时，指向空值或者空列表）；而另一个指向下一个节点，（当此“连接”为最后一个“连接”时，指向空值或者空列表）
+
+[![Doubly-linked-list.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Doubly-linked-list.svg/610px-Doubly-linked-list.svg.png)](https://zh.wikipedia.org/wiki/File:Doubly-linked-list.svg)
+*一个双向链表有三个整数值: 数值, 向后的节点链接, 向前的节点链接*
+
+在一些低级语言中, [XOR-linking](https://zh.wikipedia.org/wiki/XOR_linked_list) 提供一种在双向链表中通过用一个词来表示两个链接（前后），我们通常不提倡这种做法。
+
+**双向链表**也叫**双链表**。**双向链表**中不仅有指向后一个节点的指针，还有指向前一个节点的指针。这样可以从任何一个节点访问前一个节点，当然也可以访问后一个节点，以至整个链表。一般是在需要大批量的另外储存数据在链表中的位置的时候用。双向链表也可以配合下面的其他链表的扩展使用。
+
+由于另外储存了指向链表内容的指针，并且可能会修改相邻的节点，有的时候第一个节点可能会被删除或者在之前添加一个新的节点。这时候就要修改指向首个节点的指针。有一种方便的可以消除这种特殊情况的方法是在最后一个节点之后、第一个节点之前储存一个永远不会被删除或者移动的虚拟节点，形成一个下面说的循环链表。这个虚拟节点之后的节点就是真正的第一个节点。这种情况通常可以用这个虚拟节点直接表示这个链表，对于把链表单独的存在[数组](https://zh.wikipedia.org/wiki/%E6%95%B0%E7%BB%84)里的情况，也可以直接用这个数组表示链表并用第0个或者第-1个（如果编译器支持）节点固定的表示这个虚拟节点。
+
+### 循环链表
+
+在一个 **循环链表**中, 首节点和末节点被连接在一起。这种方式在单向和双向链表中皆可实现。要转换一个循环链表，你开始于任意一个节点然后沿着列表的任一方向直到返回开始的节点。再来看另一种方法，循环链表可以被视为“无头无尾”。这种列表很利于节约数据存储缓存， 假定你在一个列表中有一个对象并且希望所有其他对象迭代在一个非特殊的排列下。
+
+指向整个列表的指针可以被称作访问指针。
+
+[![Circularly-linked-list.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Circularly-linked-list.svg/350px-Circularly-linked-list.svg.png)](https://zh.wikipedia.org/wiki/File:Circularly-linked-list.svg)
+*用单向链表构建的循环链表*
+
+**循环链表**中第一个节点之前就是最后一个节点，反之亦然。循环链表的**无边界**使得在这样的链表上设计算法会比普通链表更加容易。对于新加入的节点应该是在第一个节点之前还是最后一个节点之后可以根据实际要求灵活处理，区别不大(详见下面实例代码)。当然，如果只会在最后插入数据（或者只会在之前），处理也是很容易的。
+
+另外有一种模拟的循环链表，就是在访问到最后一个节点之后的时候，手工的跳转到第一个节点。访问到第一个节点之前的时候也一样。这样也可以实现循环链表的功能，在直接用循环链表比较麻烦或者可能会出现问题的时候可以用。
+
+### 存储结构
+
+链表中的节点不需要以特定的方式存储，但是集中存储也是可以的，主要分下面这几种具体的存储方法：
+
+- 共用存储空间
+
+  链表的节点和其它的数据共用存储空间，优点是可以存储无限多的内容（不过要处理器支持这个大小，并且存储空间足够的情况下），不需要提前分配内存；缺点是由于内容分散，有时候可能不方便[调试](https://zh.wikipedia.org/wiki/%E8%B0%83%E8%AF%95)。
+
+- 独立存储空间
+
+  一个链表或者多个链表使用独立的存储空间，一般用[数组](https://zh.wikipedia.org/wiki/%E6%95%B0%E7%BB%84)或者类似结构实现，优点是可以自动获得一个附加数据：唯一的编号，并且方便调试；缺点是不能动态的分配内存。当然，另外的在上面加一层块状链表用来分配内存也是可以的，这样就解决了这个问题。这种方法有时候被叫做**数组模拟链表**，但是事实上只是用表示在数组中的位置的[下标](https://zh.wikipedia.org/wiki/%E4%B8%8B%E6%A0%87)索引代替了指向内存地址的[指针](https://zh.wikipedia.org/wiki/%E6%8C%87%E9%92%88)，这种下标索引其实也是逻辑上的指针，整个结构还是链表，并不算是被模拟的（但是可以说成是**用数组实现的链表**）。
+
+
+
+以下代码摘自[Linux](https://zh.wikipedia.org/wiki/Linux)[内核](https://zh.wikipedia.org/wiki/%E5%86%85%E6%A0%B8)2.6.21.5源码(部分)，展示了链表的另一种实现思路
+
+```
+ 1 struct list_head {
+ 2     struct list_head *next, *prev;
+ 3 };
+ 4 
+ 5 #define LIST_HEAD_INIT(name) { &(name), &(name) }
+ 6 #define LIST_HEAD(name) \
+ 7         struct list_head name = LIST_HEAD_INIT(name)
+ 8 
+ 9 static inline void INIT_LIST_HEAD(struct list_head *list) {
+10     list->next = list;
+11     list->prev = list;
+12 }
+13 
+14 static inline void __list_add(struct list_head *new,
+15                               struct list_head *prev,
+16                               struct list_head *next) {
+17     next->prev = new;
+18     new->next = next;
+19     new->prev = prev;
+20     prev->next = new;
+21 }
+22 
+23 static inline void list_add(struct list_head *new, struct list_head *head) {
+24     __list_add(new, head, head->next);
+25 }
+26 
+27 static inline void __list_del(struct list_head *prev, struct list_head *next) {
+28     next->prev = prev;
+29     prev->next = next;
+30 }
+31 
+32 
+33 static inline void list_del(struct list_head *entry) {
+34     __list_del(entry->prev, entry->next);
+35     entry->next = NULL;
+36     entry->prev = NULL;
+37 }
+38 
+39 #define __list_for_each(pos, head) \
+40         for (pos = (head)->next; pos != (head); pos = pos->next)
+41 
+42 #define list_for_each_entry(pos, head, member)                          \
+43         for (pos = list_entry((head)->next, typeof(*pos), member);      \
+44              prefetch(pos->member.next), &pos->member != (head);        \
+45              pos = list_entry(pos->member.next, typeof(*pos), member))
+```
+
+
+
+#### 著作权声明
+
+
+作者 [Lampard Hong](http://lampard1014.github.io)，转载请保留以上链接
